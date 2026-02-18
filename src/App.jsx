@@ -4,7 +4,7 @@ import HomePage from './pages/homePage/HomePage';
 import FavoritesPage from './pages/favoritesPage/FavoritesPage';
 import DetailPage from './pages/detailPage/DetailPage';
 import NotFoundPage from './pages/notFoundPage/NotFoundPage';
-import NavBar from './components/navBar/NavBar';
+import Layout from './components/layout/Layout.jsx'
 import './App.css';
 
 function App() {
@@ -15,22 +15,20 @@ function App() {
                 <Route path="/" element={<LoginPage/>}/>
 
                 <Route path="/home" element={
-                    <>
-                        <NavBar />
-                        <div className="page-container">
-                            <HomePage />
-                        </div>
-                    </>}/>
-                <Route path="/favorites" element={<>
-                    <NavBar />
-                    <div className="page-container">
+                    <Layout>
+                        <HomePage />
+                    </Layout>
+                } />
+                <Route path="/favorites" element={
+                    <Layout>
                         <FavoritesPage />
-                    </div>
-                </>}/>
-                <Route path="/hero/:id" element={<>
-                    <NavBar />
-                    <DetailPage />
-                </>}/>
+                    </Layout>
+                } />
+                <Route path="/hero/:id" element={
+                    <Layout>
+                        <DetailPage />
+                    </Layout>
+                } />
                 <Route path="*" element={<NotFoundPage/>}/>
             </Routes>
         </div>

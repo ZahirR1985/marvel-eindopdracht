@@ -21,17 +21,6 @@
     opacity: 0.5;
 }
 
-/* Input */
-.search-input-wrapper input {
-    width: 100%;
-    padding: 1rem 140px 1rem 50px;
-    font-size: 1rem;
-    border-radius: 50px;
-    border: none;
-    outline: none;
-    background-color: var(--color-white);
-}
-
 .search-input-wrapper button {
     position: absolute;
     right: 6px;
