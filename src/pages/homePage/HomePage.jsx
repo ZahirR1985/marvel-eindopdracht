@@ -1,6 +1,7 @@
 import "./HomePage.css"
 import SearchBar from "../../components/searchBar/SearchBar";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 
 const TOKEN =  import.meta.env.VITE_API_TOKEN;
@@ -19,6 +20,13 @@ const featuredHeroIds = [
 ];
 
 function HomePage() {
+    const [heroes, setHeroes] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        console.log("Homepage mounted");
+    }, []);
 
     function handleSearch(searchTerm) {
         console.log("Zoekterm ontvangen:", searchTerm);
