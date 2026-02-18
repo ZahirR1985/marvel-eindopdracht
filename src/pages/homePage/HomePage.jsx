@@ -1,5 +1,6 @@
 import "./HomePage.css"
 import SearchBar from "../../components/searchBar/SearchBar";
+import axios from "axios";
 
 
 const TOKEN =  import.meta.env.VITE_API_TOKEN;
