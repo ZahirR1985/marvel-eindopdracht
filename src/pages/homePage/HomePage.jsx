@@ -1,6 +1,22 @@
 import "./HomePage.css"
 import SearchBar from "../../components/searchBar/SearchBar";
 
+
+const TOKEN =  import.meta.env.VITE_API_TOKEN;
+
+const featuredHeroIds = [
+    346, // Iron Man
+    620, // Spider-Man
+    332, // Hulk
+    659, // Thor
+    149, // Captain America
+    106, // Black Panther
+    226, // Doctor Strange
+    213, // Deadpool
+    303, // Groot
+    107  // Black Widow
+];
+
 function HomePage() {
 
     function handleSearch(searchTerm) {
