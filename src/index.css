@@ -1,0 +1,56 @@
+/* =========================
+   GLOBAL STYLES
+========================= */
+
+:root {
+  --color-primary: #e62429;   /* Marvel rood */
+  --color-dark: #1a1a1a;      /* Donkere achtergrond */
+  --color-light: #f7f7f9;     /* Pagina achtergrond */
+  --color-white: #ffffff;     /* Witte vlakken */
+  --color-border: #e5e5e5;    /* Subtiele border */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Basis body instellingen */
+body {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: var(--color-dark);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--color-light);
+}
+
+/* Media nooit laten overflowen */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Forms laten dezelfde font gebruiken */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Lange woorden mogen breken (beschermt je layout) */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
