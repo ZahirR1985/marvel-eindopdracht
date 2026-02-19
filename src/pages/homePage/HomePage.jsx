@@ -2,6 +2,7 @@ import "./HomePage.css"
 import SearchBar from "../../components/searchBar/SearchBar";
 import axios from "axios";
 import {useEffect, useState} from "react";
+import HeroCard from "../../components/heroCard/HeroCard.jsx"
 
 
 const TOKEN = import.meta.env.VITE_API_TOKEN;
@@ -69,10 +70,9 @@ function HomePage() {
                 {error && <p>{error}</p>}
 
                 {!loading && !error && heroes.map((hero) => (
-                    <div key={hero.id}>
-                        <h3>{hero.name}</h3>
-                    </div>
-                ))}
+                    <HeroCard key={hero.id} hero={hero} />
+                ))
+                }
             </section>
 
         </div>
