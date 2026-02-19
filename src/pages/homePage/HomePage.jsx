@@ -1,10 +1,10 @@
 import "./HomePage.css"
 import SearchBar from "../../components/searchBar/SearchBar";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 
 
-const TOKEN =  import.meta.env.VITE_API_TOKEN;
+const TOKEN = import.meta.env.VITE_API_TOKEN;
 
 const featuredHeroIds = [
     346, // Iron Man
@@ -25,7 +25,27 @@ function HomePage() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        console.log("Homepage mounted");
+        async function fetchFeaturedHeroes() {
+            try {
+                setLoading(true);
+                setError(null);
+
+                const request = featuredHeroIds.map((id) =>
+                    axios.get(`https://superheroapi.com/api.php/${TOKEN}/${id}`)
+                );
+
+                const response = await Promise.all(request);
+                const heroesData = response.map((res) => res.data);
+                setHeroes(heroesData);
+
+            } catch (e) {
+                setError(e.message || "Failed to load featured heroes.");
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchFeaturedHeroes();
     }, []);
 
     function handleSearch(searchTerm) {
@@ -42,6 +62,17 @@ function HomePage() {
                     <p>Explore your favorite characters from the Marvel universe.</p>
                     <SearchBar onSearch={handleSearch}/>
                 </div>
+            </section>
+
+            <section className="heroes-grid">
+                {loading && <p>Loading heroes...</p>}
+                {error && <p>{error}</p>}
+
+                {!loading && !error && heroes.map((hero) => (
+                    <div key={hero.id}>
+                        <h3>{hero.name}</h3>
+                    </div>
+                ))}
             </section>
 
         </div>
