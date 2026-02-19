@@ -35,21 +35,67 @@ function DetailPage() {
 
 
     return (
-        <div>
+        <div className="detail-page">
 
             {loading && <p>Loading hero...</p>}
             {error && <p>{error}</p>}
 
             {hero && (
-                <div className="detail-page">
+                <div className="hero-detail">
+
                     <h1>{hero.name}</h1>
-                    <img src={hero.image.url} alt={hero.name}/>
-                    <p><strong>Full name:</strong> {hero.biography["full-name"]}</p>
-                    <p><strong>Publisher:</strong> {hero.biography.publisher}</p>
-                    <p><strong>Alignment:</strong> {hero.biography.alignment}</p>
+
+                    <div className="hero-top">
+
+                        <div className="hero-detail-image">
+                            <img src={hero.image.url} alt={hero.name}/>
+                        </div>
+
+                        <div className="hero-bio">
+                            <h2>Biography</h2>
+                            <p><strong>Full name:</strong> {hero.biography["full-name"] || "Unknown"}</p>
+                            <p><strong>Alter egos:</strong> {hero.biography["alter-egos"]}</p>
+                            <p><strong>Publisher:</strong> {hero.biography.publisher}</p>
+                            <p><strong>Alignment:</strong> {hero.biography.alignment}</p>
+                            <p><strong>Place of birth:</strong> {hero.biography["place-of-birth"]}</p>
+                            <p><strong>First appearance:</strong> {hero.biography["first-appearance"]}</p>
+                        </div>
+
+                        <div className="hero-stats">
+                            <h2>Powerstats</h2>
+
+                            {Object.entries(hero.powerstats).map(([stat, value]) => (
+                                <div key={stat} className="stat-row">
+                                    <span className="stat-name">{stat}</span>
+                                    <div className="stat-bar">
+                                        <div
+                                            className="stat-fill"
+                                            style={{width: `${value}%`}}
+                                        ></div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                    </div>
+
+                    <div className="hero-bottom">
+
+                        <h2>Work</h2>
+                        <p><strong>Occupation:</strong> {hero.work.occupation || "Unknown"}</p>
+                        <p><strong>Base:</strong> {hero.work.base || "Unknown"}</p>
+
+                        <h2>Connections</h2>
+                        <p><strong>Group affiliation:</strong> {hero.connections["group-affiliation"]}</p>
+                        <p><strong>Relatives:</strong> {hero.connections.relatives}</p>
+
+                    </div>
+
                 </div>
+
             )}
         </div>
+
     );
 }
 
