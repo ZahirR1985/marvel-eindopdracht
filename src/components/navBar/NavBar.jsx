@@ -4,6 +4,7 @@ import {FaUserCircle} from "react-icons/fa";
 import logo from "../../assets/logo1.jpg"
 
 function Navbar() {
+    //later const { user } = useContext(AuthContext);//
     const user = {
         name: "Peter Parker"
     };
