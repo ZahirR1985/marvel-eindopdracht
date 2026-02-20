@@ -1,5 +1,6 @@
 import "./DetailPage.css"
 import axios from "axios";
+import {FaHeart} from "react-icons/fa";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 
@@ -10,6 +11,26 @@ function DetailPage() {
     const [hero, setHero] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [isFavorite, setIsFavorite] = useState(false);
+
+    function toggleFavorite() {
+        const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+        let updatedFavorites;
+
+        if (isFavorite) {
+            // verwijderen
+            updatedFavorites = savedFavorites.filter(
+                (fav) => fav.id !== hero.id
+            );
+        } else {
+            // toevoegen
+            updatedFavorites = [...savedFavorites, hero];
+        }
+
+        localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+        setIsFavorite(!isFavorite);
+    }
 
     useEffect(() => {
         async function fetchHero() {
@@ -22,6 +43,14 @@ function DetailPage() {
                 );
 
                 setHero(response.data);
+
+                const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+                const exists = savedFavorites.some(
+                    (fav) => fav.id === response.data.id
+                );
+
+                setIsFavorite(exists);
 
             } catch (e) {
                 setError(e.message || "Failed to load hero.");
@@ -43,7 +72,17 @@ function DetailPage() {
             {hero && (
                 <div className="hero-detail">
 
-                    <h1>{hero.name}</h1>
+                    <div className="hero-header">
+
+                        <button
+                            className={`favorite-btn ${isFavorite ? "active" : ""}`}
+                            onClick={toggleFavorite}
+                        >
+                            <FaHeart />
+                        </button>
+                        <h1>{hero.name}</h1>
+                    </div>
+
 
                     <div className="hero-top">
 
