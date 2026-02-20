@@ -38,3 +38,12 @@
     gap: 2rem;
     margin: 3rem 0;
 }
+.back-home-btn {
+    margin-top: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+}

@@ -3,6 +3,7 @@ import SearchBar from "../../components/searchBar/SearchBar";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import HeroCard from "../../components/heroCard/HeroCard.jsx"
+import {Link} from "react-router-dom";
 
 
 const TOKEN = import.meta.env.VITE_API_TOKEN;
@@ -25,34 +26,75 @@ function HomePage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        async function fetchFeaturedHeroes() {
-            try {
-                setLoading(true);
-                setError(null);
+    async function fetchFeaturedHeroes() {
+        try {
+            setLoading(true);
+            setError(null);
 
-                const request = featuredHeroIds.map((id) =>
-                    axios.get(`https://superheroapi.com/api.php/${TOKEN}/${id}`)
-                );
+            const request = featuredHeroIds.map((id) =>
+                axios.get(`https://superheroapi.com/api.php/${TOKEN}/${id}`)
+            );
 
-                const response = await Promise.all(request);
-                const heroesData = response.map((res) => res.data);
-                setHeroes(heroesData);
+            const response = await Promise.all(request);
+            const heroesData = response.map((res) => res.data);
+            setHeroes(heroesData);
 
-            } catch (e) {
-                setError(e.message || "Failed to load featured heroes.");
-            } finally {
-                setLoading(false);
-            }
+        } catch (e) {
+            setError(e.message || "Failed to load featured heroes.");
+        } finally {
+            setLoading(false);
         }
+    }
 
+    useEffect(() => {
         fetchFeaturedHeroes();
     }, []);
 
-    function handleSearch(searchTerm) {
-        console.log("Zoekterm ontvangen:", searchTerm);
-        // Hier komt straks je API call
+    function handleBackToHome() {
+        setError(null);
+        fetchFeaturedHeroes();
     }
+
+
+    async function handleSearch(searchTerm) {
+
+        if (!searchTerm.trim()) return;
+
+        try {
+            setLoading(true);
+            setError(null);
+
+            const response = await axios.get(
+                `https://superheroapi.com/api.php/${TOKEN}/search/${searchTerm}`
+            );
+
+            if (response.data.response === "error") {
+                setHeroes([]);
+                setError("No Marvel heroes found.");
+                return;
+            }
+
+            const results = response.data.results;
+
+            const marvelOnly = results.filter(
+                hero => hero.biography.publisher === "Marvel Comics"
+            );
+
+            if (marvelOnly.length === 0) {
+                setHeroes([]);
+                setError("No Marvel heroes found.");
+                return;
+            }
+
+            setHeroes(marvelOnly);
+
+        } catch (e) {
+            setError(e.message || "Search failed.");
+        } finally {
+            setLoading(false);
+        }
+    }
+
 
     return (
         <div className="home-page">
@@ -67,10 +109,17 @@ function HomePage() {
 
             <section className="heroes-grid">
                 {loading && <p>Loading heroes...</p>}
-                {error && <p>{error}</p>}
+                {error && (
+                    <div className="error-message">
+                        <p>{error}</p>
+                        <button onClick={handleBackToHome} className="back-home-btn">
+                            Go back to Home
+                        </button>
+                    </div>
+                )}
 
                 {!loading && !error && heroes.map((hero) => (
-                    <HeroCard key={hero.id} hero={hero} />
+                    <HeroCard key={hero.id} hero={hero}/>
                 ))
                 }
             </section>
