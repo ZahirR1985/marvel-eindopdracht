@@ -1,18 +1,23 @@
 import "./NavBar.css"
-import {NavLink} from "react-router-dom";
-import {FaUserCircle} from "react-icons/fa";
+import { NavLink, useNavigate } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext.jsx";
 import logo from "../../assets/logo1.jpg"
 import Button from "../button/Button.jsx";
 
 function Navbar() {
-    //later const { user } = useContext(AuthContext);//
+    const { logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+
     const user = {
         name: "Peter Parker"
     };
 
     function handleLogout() {
-        console.log("Uitloggen...");
-        // Hier later logout logica
+        console.log("Logout clicked");
+        logout();          // token verwijderen + state resetten
+        navigate("/");     // terug naar login
     }
 
     return (

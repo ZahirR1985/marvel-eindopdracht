@@ -5,7 +5,9 @@ import FavoritesPage from './pages/favoritesPage/FavoritesPage';
 import DetailPage from './pages/detailPage/DetailPage';
 import NotFoundPage from './pages/notFoundPage/NotFoundPage';
 import Layout from './components/layout/Layout.jsx'
+import RegisterPage from './pages/registerPage/RegisterPage';
 import './App.css';
+import ProtectedRoute from "./components/protectedRoute/ProtectedRoute.jsx";
 
 function App() {
 
@@ -13,22 +15,32 @@ function App() {
         <div>
             <Routes>
                 <Route path="/" element={<LoginPage/>}/>
+                <Route path="/register" element={<RegisterPage/>}/>
 
                 <Route path="/home" element={
-                    <Layout>
-                        <HomePage />
-                    </Layout>
-                } />
+                    <ProtectedRoute>
+                        <Layout>
+                            <HomePage/>
+                        </Layout>
+                    </ProtectedRoute>
+                }/>
+
                 <Route path="/favorites" element={
-                    <Layout>
-                        <FavoritesPage />
-                    </Layout>
-                } />
+                    <ProtectedRoute>
+                        <Layout>
+                            <FavoritesPage/>
+                        </Layout>
+                    </ProtectedRoute>
+                }/>
+
                 <Route path="/hero/:id" element={
-                    <Layout>
-                        <DetailPage />
-                    </Layout>
-                } />
+                    <ProtectedRoute>
+                        <Layout>
+                            <DetailPage/>
+                        </Layout>
+                    </ProtectedRoute>
+                }/>
+
                 <Route path="*" element={<NotFoundPage/>}/>
             </Routes>
         </div>
