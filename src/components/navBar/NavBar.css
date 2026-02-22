@@ -79,21 +79,3 @@
     border-bottom-color: var(--color-primary);
 }
 
-
-/* =========================
-   LOGOUT BUTTON
-========================= */
-
-.logout-btn {
-    background: none;
-    border: none;
-    color: var(--color-white);
-    font-weight: 600;
-    cursor: pointer;
-    letter-spacing: 0.5px;
-    transition: color 0.2s ease;
-}
-
-.logout-btn:hover {
-    color: var(--color-primary);
-}

@@ -1,0 +1,50 @@
+/* Base button */
+.btn {
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Primary */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
+/* Ghost / text */
+.btn-ghost {
+    background: none;
+    color: var(--color-white);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.btn-ghost:hover {
+    color: var(--color-primary);
+}
+
+/* Icon */
+.btn-icon {
+    background: none;
+    padding: 0.4rem;
+    font-size: 1.4rem;
+    color: #ccc;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-icon:hover {
+    color: var(--color-primary);
+    transform: scale(1.1);
+}
+
+/* Active icon */
+.btn-icon.active {
+    color: var(--color-primary);
+}
