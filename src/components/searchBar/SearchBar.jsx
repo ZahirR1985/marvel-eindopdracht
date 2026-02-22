@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import {useState} from "react";
+import {FaSearch} from "react-icons/fa";
+import Button from "../button/Button.jsx"
 import "./SearchBar.css";
 
-function SearchBar({ onSearch }) {
+function SearchBar({onSearch}) {
     const [query, setQuery] = useState("");
 
     function handleSubmit(e) {
@@ -15,7 +16,7 @@ function SearchBar({ onSearch }) {
         <form className="search-bar" onSubmit={handleSubmit}>
             <div className="search-input-wrapper">
 
-                <FaSearch className="search-icon" />
+                <FaSearch className="search-icon"/>
 
                 <input
                     type="text"
@@ -24,9 +25,9 @@ function SearchBar({ onSearch }) {
                     onChange={(e) => setQuery(e.target.value)}
                 />
 
-                <button type="submit">
+                <Button type="submit">
                     Search
-                </button>
+                </Button>
 
             </div>
         </form>

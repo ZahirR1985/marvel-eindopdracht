@@ -2,6 +2,7 @@ import "./NavBar.css"
 import {NavLink} from "react-router-dom";
 import {FaUserCircle} from "react-icons/fa";
 import logo from "../../assets/logo1.jpg"
+import Button from "../button/Button.jsx";
 
 function Navbar() {
     //later const { user } = useContext(AuthContext);//
@@ -55,9 +56,10 @@ function Navbar() {
                             </NavLink>
                         </li>
                         <li>
-                            <button className="logout-btn" onClick={handleLogout}>
+                            <Button variant="ghost" onClick={handleLogout}>
                                 Logout
-                            </button>
+                            </Button>
+
                         </li>
                     </ul>
                 </nav>

@@ -3,6 +3,7 @@ import axios from "axios";
 import {FaHeart} from "react-icons/fa";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import Button from "../../components/button/Button.jsx";
 
 const TOKEN = import.meta.env.VITE_API_TOKEN;
 
@@ -74,12 +75,14 @@ function DetailPage() {
 
                     <div className="hero-header">
 
-                        <button
-                            className={`favorite-btn ${isFavorite ? "active" : ""}`}
+                        <Button
+                            variant="icon"
                             onClick={toggleFavorite}
+                            className={isFavorite ? "active" : ""}
                         >
-                            <FaHeart />
-                        </button>
+                            <FaHeart/>
+                        </Button>
+
                         <h1>{hero.name}</h1>
                     </div>
 

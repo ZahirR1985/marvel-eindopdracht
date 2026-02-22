@@ -4,6 +4,7 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import HeroCard from "../../components/heroCard/HeroCard.jsx"
 import {Link} from "react-router-dom";
+import Button from "../../components/button/Button.jsx";
 
 
 const TOKEN = import.meta.env.VITE_API_TOKEN;
@@ -112,9 +113,9 @@ function HomePage() {
                 {error && (
                     <div className="error-message">
                         <p>{error}</p>
-                        <button onClick={handleBackToHome} className="back-home-btn">
+                        <Button variant="ghost" onClick={handleBackToHome}>
                             Go back to Home
-                        </button>
+                        </Button>
                     </div>
                 )}
 
