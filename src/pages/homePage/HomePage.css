@@ -38,12 +38,14 @@
     gap: 2rem;
     margin: 3rem 0;
 }
-.back-home-btn {
-    margin-top: 0.5rem;
-    background: none;
-    border: none;
-    color: var(--color-primary);
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: underline;
+
+.error-message {
+    grid-column: 1 / -1;   /* 👈 dit is de fix */
+    margin-top: 2rem;
+    text-align: center;
+}
+
+
+.error-message .btn {
+    margin-top: 1rem;
 }

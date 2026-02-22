@@ -21,7 +21,7 @@
 /* Ghost / text */
 .btn-ghost {
     background: none;
-    color: var(--color-white);
+    color: var(--color-dark);
     font-weight: 600;
     letter-spacing: 0.5px;
 }
@@ -48,3 +48,5 @@
 .btn-icon.active {
     color: var(--color-primary);
 }
+
+

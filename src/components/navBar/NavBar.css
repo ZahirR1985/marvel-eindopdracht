@@ -79,3 +79,12 @@
     border-bottom-color: var(--color-primary);
 }
 
+.navbar .btn-ghost {
+    color: var(--color-white);
+}
+
+.navbar .btn-ghost:hover {
+    color: var(--color-primary);
+}
+
+

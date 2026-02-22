@@ -8,6 +8,9 @@
   --color-light: #eceff3;     /* Pagina achtergrond */
   --color-white: #ffffff;     /* Witte vlakken */
   --color-border: #e5e5e5;    /* Subtiele border */
+  --color-danger: #c0392b;
+  --color-danger-hover: #a93226;
+
 }
 
 * {

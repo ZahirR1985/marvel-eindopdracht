@@ -1,6 +1,8 @@
 import {useState} from "react";
 import HeroCard from "../../components/heroCard/HeroCard";
 import "./FavoritesPage.css";
+import Button from "../../components/button/Button.jsx";
+import {FaHeart} from "react-icons/fa";
 
 function FavoritesPage() {
 
@@ -33,12 +35,14 @@ function FavoritesPage() {
                     <div key={hero.id} className="favorite-item">
                         <HeroCard hero={hero}/>
 
-                        <button
-                            className="remove-btn"
+                        <Button
+                            variant="icon"
+                            className="active"
                             onClick={() => removeFavorite(hero.id)}
                         >
-                            Remove
-                        </button>
+                            <FaHeart/>
+                        </Button>
+
                     </div>
                 ))}
             </div>
