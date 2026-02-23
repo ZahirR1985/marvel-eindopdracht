@@ -4,22 +4,33 @@ export const AuthContext = createContext({})
 
 function AuthContextProvider({ children }) {
     const [token, setToken] = useState(localStorage.getItem("token"));
+    const [user, setUser] = useState(() => {
+        const savedEmail = localStorage.getItem("email");
+        return savedEmail ? { email: savedEmail } : null;
+    });
+
     const isAuth = !!token;
 
-    function login(receivedToken) {
+    function login(receivedToken, email) {
         localStorage.setItem("token", receivedToken);
+        localStorage.setItem("email", email);
         setToken(receivedToken);
+        setUser({ email })
     }
 
     function logout() {
         localStorage.removeItem("token");
+        localStorage.removeItem("email");
         setToken(null);
+        setUser(null);
     }
 
     const contextData = {
-        isAuth: isAuth,
-        login: login,
-        logout: logout,
+        isAuth,
+        token,
+        user,
+        login,
+        logout
     };
 
 

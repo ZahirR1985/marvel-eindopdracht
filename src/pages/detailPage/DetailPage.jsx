@@ -1,37 +1,25 @@
 import "./DetailPage.css"
 import axios from "axios";
 import {FaHeart} from "react-icons/fa";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useContext} from "react";
 import {useParams} from "react-router-dom";
 import Button from "../../components/button/Button.jsx";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
-const TOKEN = import.meta.env.VITE_API_TOKEN;
+const HERO_API_TOKEN = import.meta.env.VITE_API_TOKEN;
+const BASE_URL = import.meta.env.VITE_NOVI_BASE_URL;
+const PROJECT_ID = import.meta.env.VITE_NOVI_PROJECT_ID;
 
 function DetailPage() {
     const {id} = useParams();
+    const {token, user} = useContext(AuthContext);
+
     const [hero, setHero] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [isFavorite, setIsFavorite] = useState(false);
+    const [favoriteId, setFavoriteId] = useState(null);
 
-    function toggleFavorite() {
-        const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-
-        let updatedFavorites;
-
-        if (isFavorite) {
-            // verwijderen
-            updatedFavorites = savedFavorites.filter(
-                (fav) => fav.id !== hero.id
-            );
-        } else {
-            // toevoegen
-            updatedFavorites = [...savedFavorites, hero];
-        }
-
-        localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-        setIsFavorite(!isFavorite);
-    }
 
     useEffect(() => {
         async function fetchHero() {
@@ -40,18 +28,10 @@ function DetailPage() {
                 setError(null);
 
                 const response = await axios.get(
-                    `https://superheroapi.com/api.php/${TOKEN}/${id}`
+                    `https://superheroapi.com/api.php/${HERO_API_TOKEN}/${id}`
                 );
 
                 setHero(response.data);
-
-                const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-
-                const exists = savedFavorites.some(
-                    (fav) => fav.id === response.data.id
-                );
-
-                setIsFavorite(exists);
 
             } catch (e) {
                 setError(e.message || "Failed to load hero.");
@@ -63,6 +43,96 @@ function DetailPage() {
         fetchHero();
     }, [id]);
 
+    useEffect(() => {
+        async function checkFavorite() {
+            if (!token || !user) return;
+
+            try {
+                const response = await axios.get(`${BASE_URL}/api/favorites`, {
+                    headers: {
+                        "novi-education-project-id": PROJECT_ID,
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+
+                const userFavorites = response.data.filter(
+                    fav => fav.email === user.email && fav.heroId === Number(id)
+                );
+
+                if (userFavorites.length > 0) {
+                    setIsFavorite(true);
+                    setFavoriteId(userFavorites[0].id);
+                } else {
+                    setIsFavorite(false);
+                    setFavoriteId(null);
+                }
+
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        checkFavorite();
+    }, [id, token, user]);
+
+    async function toggleFavorite() {
+        console.log("toggle clicked");
+        console.log("token:", token);
+        console.log("user:", user);
+        if (!token || !user) return;
+
+        try {
+            if (isFavorite) {
+                await axios.delete(
+                    `${BASE_URL}/api/favorites/${favoriteId}`,
+                    {
+                        headers: {
+                            "novi-education-project-id": PROJECT_ID,
+                            Authorization: `Bearer ${token}`
+                        }
+                    }
+                );
+                setIsFavorite(false);
+                setFavoriteId(null);
+            } else {
+
+                await axios.post(
+                    `${BASE_URL}/api/favorites`,
+                    {
+                        id: Date.now(),
+                        email: user.email,
+                        heroId: Number(id)
+                    },
+                    {
+                        headers: {
+                            "novi-education-project-id": PROJECT_ID,
+                            Authorization: `Bearer ${token}`
+                        }
+                    }
+                );
+
+                // 🔥 Hier halen we het ECHTE ID opnieuw op
+                const response = await axios.get(`${BASE_URL}/api/favorites`, {
+                    headers: {
+                        "novi-education-project-id": PROJECT_ID,
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+
+                const userFavorites = response.data.filter(
+                    fav => fav.email === user.email && fav.heroId === Number(id)
+                );
+
+                if (userFavorites.length > 0) {
+                    setIsFavorite(true);
+                    setFavoriteId(userFavorites[0].id);
+                }
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
 
     return (
         <div className="detail-page">
@@ -72,9 +142,7 @@ function DetailPage() {
 
             {hero && (
                 <div className="hero-detail">
-
                     <div className="hero-header">
-
                         <Button
                             variant="icon"
                             onClick={toggleFavorite}
@@ -85,7 +153,6 @@ function DetailPage() {
 
                         <h1>{hero.name}</h1>
                     </div>
-
 
                     <div className="hero-top">
 
@@ -132,12 +199,9 @@ function DetailPage() {
                         <p><strong>Relatives:</strong> {hero.connections.relatives}</p>
 
                     </div>
-
                 </div>
-
             )}
         </div>
-
     );
 }
 

@@ -1,0 +1,63 @@
+{
+  "collections": [
+    {
+      "name": "profiles",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "displayName",
+          "type": "string",
+          "required": true,
+          "min": 2,
+          "max": 50
+        }
+      ],
+      "permissions": {
+        "GET": ["anonymous", "member", "admin"],
+        "POST": ["anonymous", "member", "admin"],
+        "PUT": ["member", "admin"],
+        "PATCH": ["member", "admin"],
+        "DELETE": ["admin"]
+      }
+    },
+    {
+      "name": "favorites",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "heroId",
+          "type": "number",
+          "required": true
+        }
+      ],
+      "permissions": {
+        "GET": ["member", "admin"],
+        "POST": ["member", "admin"],
+        "DELETE": ["member", "admin"]
+      }
+    }
+  ],
+  "users": [],
+  "data": {
+    "profiles": [],
+    "favorites": []
+  }
+}
