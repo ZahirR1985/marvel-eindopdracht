@@ -9,6 +9,7 @@ function RegisterPage() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [displayName, setDisplayName] = useState("");
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -33,6 +34,20 @@ function RegisterPage() {
                     },
                 }
             );
+
+            await axios.post(
+                `${BASE_URL}/api/profiles`,
+                {
+                    id: Date.now(),
+                    email,
+                    displayName
+                },
+                {
+                    headers: {
+                        "novi-education-project-id": PROJECT_ID,
+                    },
+                }
+            );
             navigate("/");
 
         } catch (e) {
@@ -50,6 +65,14 @@ function RegisterPage() {
                     <h1>Register</h1>
 
                     <form onSubmit={handleSubmit} className="register-form">
+                        <input
+                            type="text"
+                            placeholder="Display name"
+                            value={displayName}
+                            onChange={(e) => setDisplayName(e.target.value)}
+                            required
+                        />
+
                         <input
                             type="email"
                             placeholder="Email"

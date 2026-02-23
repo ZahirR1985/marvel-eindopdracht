@@ -37,11 +37,11 @@ function LoginPage() {
 
             const receivedToken = response.data.token;
 
-            login(receivedToken);
+            login(receivedToken, email);
             navigate("/home");
 
-        } catch (err) {
-            console.log(err);
+        } catch (e) {
+            console.log(e);
             setError("Invalid email or password.");
         } finally {
             setLoading(false);
