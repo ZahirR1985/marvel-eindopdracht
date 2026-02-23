@@ -1,4 +1,4 @@
-.login-page {
+.register-page {
     min-height: 100vh;
     background-color: var(--color-dark);
     display: flex;
@@ -7,7 +7,7 @@
     padding: 2rem;
 }
 
-.login-container {
+.register-container {
     width: 100%;
     max-width: 1000px;
     height: 650px;
@@ -22,7 +22,7 @@
     0 0 25px rgba(230, 36, 41, 0.18);
 }
 
-.login-form-card {
+.register-form-card {
     background: rgba(0, 0, 0, 0.85);
     padding: 3rem;
     width: 100%;
@@ -31,20 +31,19 @@
     backdrop-filter: blur(5px);
 }
 
-.login-form-card h1 {
+.register-form-card h1 {
     color: var(--color-light);
     text-align: center;
     margin-bottom: 2rem;
-    letter-spacing: 1px;
 }
 
-.login-form {
+.register-form {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
 }
 
-.login-form input {
+.register-form input {
     padding: 0.9rem 1rem;
     border-radius: 8px;
     border: none;
@@ -52,24 +51,24 @@
     background-color: var(--color-light);
 }
 
-.login-form input:focus {
+.register-form input:focus {
     outline: 2px solid var(--color-primary);
 }
 
-.register-link {
+.login-link {
     margin-top: 1rem;
     text-align: center;
     font-size: 0.9rem;
     color: white;
 }
 
-.register-link a {
+.login-link a {
     color: var(--color-primary);
     text-decoration: none;
     font-weight: 600;
 }
 
-.register-link a:hover {
+.login-link a:hover {
     text-decoration: underline;
 }
 
