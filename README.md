@@ -30,7 +30,7 @@ De applicatie maakt gebruik van de SuperHero API voor heldeninformatie en de NOV
 
 ## 2. Screenshot
 
-![Applicatie Screenshot](Screenshot.png)
+![Applicatie Screenshot](Ssreenshot.png)
 
 ---
 
