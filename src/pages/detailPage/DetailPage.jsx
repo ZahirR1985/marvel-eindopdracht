@@ -76,9 +76,7 @@ function DetailPage() {
     }, [id, token, user]);
 
     async function toggleFavorite() {
-        console.log("toggle clicked");
-        console.log("token:", token);
-        console.log("user:", user);
+
         if (!token || !user) return;
 
         try {
@@ -111,7 +109,7 @@ function DetailPage() {
                     }
                 );
 
-                // 🔥 Hier halen we het ECHTE ID opnieuw op
+                // Hier halen we het ECHTE ID opnieuw op
                 const response = await axios.get(`${BASE_URL}/api/favorites`, {
                     headers: {
                         "novi-education-project-id": PROJECT_ID,
@@ -132,7 +130,6 @@ function DetailPage() {
             console.error(e);
         }
     }
-
 
     return (
         <div className="detail-page">

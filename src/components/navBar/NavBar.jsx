@@ -7,12 +7,8 @@ import logo from "../../assets/logo1.jpg"
 import Button from "../button/Button.jsx";
 
 function Navbar() {
-    const { logout } = useContext(AuthContext);
+    const { logout, user } = useContext(AuthContext);
     const navigate = useNavigate();
-
-    const user = {
-        name: "Peter Parker"
-    };
 
     function handleLogout() {
         console.log("Logout clicked");
@@ -24,20 +20,17 @@ function Navbar() {
         <header className="navbar">
             <div className="navbar-container">
 
-                {/* LINKS – gebruiker */}
                 <div className="nav-user">
                     <FaUserCircle className="user-icon"/>
-                    <span>{user.name}</span>
+                    <span>{user?.displayName || user?.email}</span>
                 </div>
 
-                {/* MIDDEN – logo */}
                 <div className="nav-logo">
                     <NavLink to="/home">
                         <img src={logo} alt="Nav logo"/>
                     </NavLink>
                 </div>
 
-                {/* RECHTS – navigatie */}
                 <nav>
                     <ul className="nav-links">
                         <li>
