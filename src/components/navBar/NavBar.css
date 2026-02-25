@@ -4,20 +4,16 @@
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-/* Grid layout */
 .navbar-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 1.5rem 2rem;
 
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
+    position: relative;
 }
-
-/* =========================
-   LEFT – USER INFO
-========================= */
 
 .nav-user {
     display: flex;
@@ -32,13 +28,10 @@
     color: var(--color-primary);
 }
 
-/* =========================
-   CENTER – LOGO
-========================= */
-
 .nav-logo {
-    display: flex;
-    justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .nav-logo img {
@@ -46,21 +39,15 @@
     filter: drop-shadow(0 0 8px rgba(230, 36, 41, 0.5));
 }
 
-/* =========================
-   RIGHT – NAV LINKS
-========================= */
-
 .nav-links {
     list-style: none;
     display: flex;
-    justify-content: flex-end;
     align-items: center;
     gap: 2rem;
     margin: 0;
     padding: 0;
 }
 
-/* Links */
 .nav-links a {
     text-decoration: none;
     color: var(--color-white);
@@ -74,7 +61,6 @@
     color: var(--color-primary);
 }
 
-/* Active link */
 .nav-links a.active-link {
     border-bottom-color: var(--color-primary);
 }
