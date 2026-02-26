@@ -26,7 +26,6 @@ function FavoritesPage() {
                 setLoading(true);
                 setError(null);
 
-                // 🔹 1. Haal favorites op uit backend
                 const favoritesResponse = await axios.get(
                     `${BASE_URL}/api/favorites`,
                     {
@@ -41,7 +40,6 @@ function FavoritesPage() {
                     fav => fav.email === user.email
                 );
 
-                // 🔹 2. Haal hero data op via Superhero API
                 const heroRequests = userFavorites.map(fav =>
                     axios.get(
                         `https://superheroapi.com/api.php/${HERO_API_TOKEN}/${fav.heroId}`
@@ -68,7 +66,6 @@ function FavoritesPage() {
         fetchFavorites();
     }, [token, user]);
 
-    // 🔥 DELETE favorite
     async function removeFavorite(favoriteId) {
         try {
             await axios.delete(
@@ -81,7 +78,6 @@ function FavoritesPage() {
                 }
             );
 
-            // Update UI zonder refresh
             setFavorites(prev =>
                 prev.filter(fav => fav.favoriteId !== favoriteId)
             );
@@ -93,7 +89,14 @@ function FavoritesPage() {
 
     return (
         <div className="favorites-page">
-            <h1>Your Favorite Heroes</h1>
+            <section className="hero-section">
+                <div className="hero-content">
+                    <h1>
+                        Your <span>Favorite</span> Heroes
+                    </h1>
+                    <p>All your saved Marvel characters in one place.</p>
+                </div>
+            </section>
 
             {loading && <p>Loading favorites...</p>}
             {error && <p>{error}</p>}
@@ -105,7 +108,6 @@ function FavoritesPage() {
                 {favorites.map(item => (
                     <div key={item.favoriteId} className="favorite-item">
                         <HeroCard hero={item.hero}/>
-
                         <Button
                             variant="icon"
                             className="active"
