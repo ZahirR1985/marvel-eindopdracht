@@ -26,7 +26,6 @@ function FavoritesPage() {
                 setLoading(true);
                 setError(null);
 
-                // Haal favorites op uit backend
                 const favoritesResponse = await axios.get(
                     `${BASE_URL}/api/favorites`,
                     {
@@ -41,7 +40,6 @@ function FavoritesPage() {
                     fav => fav.email === user.email
                 );
 
-                //Haal hero data op via Superhero API
                 const heroRequests = userFavorites.map(fav =>
                     axios.get(
                         `https://superheroapi.com/api.php/${HERO_API_TOKEN}/${fav.heroId}`
@@ -68,7 +66,6 @@ function FavoritesPage() {
         fetchFavorites();
     }, [token, user]);
 
-    //DELETE favorite
     async function removeFavorite(favoriteId) {
         try {
             await axios.delete(
@@ -81,7 +78,6 @@ function FavoritesPage() {
                 }
             );
 
-            // Update UI zonder refresh
             setFavorites(prev =>
                 prev.filter(fav => fav.favoriteId !== favoriteId)
             );

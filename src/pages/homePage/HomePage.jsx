@@ -110,7 +110,7 @@ function HomePage() {
                     <div className="error-message">
                         <p>{error}</p>
                         <Button variant="ghost" onClick={handleBackToHome}>
-                            Go back to Home
+                            Go back
                         </Button>
                     </div>
                 )}

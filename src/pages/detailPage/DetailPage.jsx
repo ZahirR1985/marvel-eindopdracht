@@ -109,7 +109,6 @@ function DetailPage() {
                     }
                 );
 
-                // Hier halen we het ECHTE ID opnieuw op
                 const response = await axios.get(`${BASE_URL}/api/favorites`, {
                     headers: {
                         "novi-education-project-id": PROJECT_ID,
@@ -186,7 +185,6 @@ function DetailPage() {
                     </div>
 
                     <div className="hero-bottom">
-
                         <h2>Work</h2>
                         <p><strong>Occupation:</strong> {hero.work.occupation || "Unknown"}</p>
                         <p><strong>Base:</strong> {hero.work.base || "Unknown"}</p>
@@ -194,7 +192,6 @@ function DetailPage() {
                         <h2>Connections</h2>
                         <p><strong>Group affiliation:</strong> {hero.connections["group-affiliation"]}</p>
                         <p><strong>Relatives:</strong> {hero.connections.relatives}</p>
-
                     </div>
                 </div>
             )}

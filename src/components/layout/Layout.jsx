@@ -1,4 +1,3 @@
-import NavBar from "../navBar/NavBar";
 import Footer from "../footer/Footer";
 import './Layout.css'
 import Navbar from "../navBar/NavBar";
