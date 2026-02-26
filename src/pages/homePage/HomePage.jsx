@@ -3,7 +3,6 @@ import SearchBar from "../../components/searchBar/SearchBar";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import HeroCard from "../../components/heroCard/HeroCard.jsx"
-import {Link} from "react-router-dom";
 import Button from "../../components/button/Button.jsx";
 
 
@@ -13,10 +12,10 @@ const featuredHeroIds = [
     346, // Iron Man
     620, // Spider-Man
     332, // Hulk
-    659, // Thor
+    655, // Thanos
     149, // Captain America
     106, // Black Panther
-    226, // Doctor Strange
+    680, // Ultron
     213, // Deadpool
     303, // Groot
     107  // Black Widow
@@ -55,7 +54,6 @@ function HomePage() {
         setError(null);
         fetchFeaturedHeroes();
     }
-
 
     async function handleSearch(searchTerm) {
 
@@ -96,10 +94,8 @@ function HomePage() {
         }
     }
 
-
     return (
         <div className="home-page">
-
             <section className="hero-section">
                 <div className="hero-content">
                     <h1>Discover <span>Marvel</span> Heroes</h1>
@@ -124,7 +120,6 @@ function HomePage() {
                 ))
                 }
             </section>
-
         </div>
     );
 }

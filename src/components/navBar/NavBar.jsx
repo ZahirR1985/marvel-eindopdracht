@@ -12,8 +12,8 @@ function Navbar() {
 
     function handleLogout() {
         console.log("Logout clicked");
-        logout();          // token verwijderen + state resetten
-        navigate("/");     // terug naar login
+        logout();
+        navigate("/");
     }
 
     return (
