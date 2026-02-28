@@ -84,6 +84,7 @@ function FavoritesPage() {
 
         } catch (e) {
             console.error(e);
+            setError("Failed to remove favorite. Please try again.");
         }
     }
 

@@ -40,7 +40,8 @@ function HomePage() {
             setHeroes(heroesData);
 
         } catch (e) {
-            setError(e.message || "Failed to load featured heroes.");
+            console.error(e);
+            setError("Failed to load featured heroes.");
         } finally {
             setLoading(false);
         }
@@ -88,7 +89,8 @@ function HomePage() {
             setHeroes(marvelOnly);
 
         } catch (e) {
-            setError(e.message || "Search failed.");
+            console.error(e);
+            setError( "Search failed. Please try again");
         } finally {
             setLoading(false);
         }

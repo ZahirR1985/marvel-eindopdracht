@@ -34,7 +34,8 @@ function DetailPage() {
                 setHero(response.data);
 
             } catch (e) {
-                setError(e.message || "Failed to load hero.");
+                console.error(e);
+                setError("Failed to load hero. Please try again");
             } finally {
                 setLoading(false);
             }
@@ -48,6 +49,7 @@ function DetailPage() {
             if (!token || !user) return;
 
             try {
+                setError(null);
                 const response = await axios.get(`${BASE_URL}/api/favorites`, {
                     headers: {
                         "novi-education-project-id": PROJECT_ID,
@@ -69,6 +71,7 @@ function DetailPage() {
 
             } catch (e) {
                 console.error(e);
+                setError("Failed to check favorite status. Please try again");
             }
         }
 
@@ -80,6 +83,7 @@ function DetailPage() {
         if (!token || !user) return;
 
         try {
+            setError(null);
             if (isFavorite) {
                 await axios.delete(
                     `${BASE_URL}/api/favorites/${favoriteId}`,
@@ -127,6 +131,7 @@ function DetailPage() {
             }
         } catch (e) {
             console.error(e);
+            setError("Failed to update favorite. Please try again");
         }
     }
 

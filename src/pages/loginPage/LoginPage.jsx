@@ -41,7 +41,7 @@ function LoginPage() {
             navigate("/home");
 
         } catch (e) {
-            console.log(e);
+            console.error(e);
             setError("Invalid email or password.");
         } finally {
             setLoading(false);
